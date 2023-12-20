@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="news,nepalinews,dainiki">
+    <meta name="author" content="Himal Gole">
+    <title>Dainiki</title>
+    <link rel="shortcut icon" href="{% static 'photos/favicon.jpg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    {% include "navbar.html" %}
+    {% include "banner.html" with data=banners %}
+    <div class="mobile-nav">
+        <a href="#" class="link">Sports</a>
+        <a href="#" class="link">Internatinal</a>
+        <a href="#" class="link">Literature</a>
+        <a href="#" class="link">Miscellaneous</a>
+        <a href="#" class="link">Blog</a>
+    </div>
+    <div class="live-info">
+        <div class="live-icon">
+            <p>LIVE</p>
+        </div>
+        <a href="">Dainiki is Live:</a>
+        <marquee behavior="" direction="" style="width: calc(100% - 200px);">
+           {% for x in posts %}
+            <a href="">{{x.title}}.</a>
+           {% endfor %}
+        </marquee>
+    </div>
+    <section class="news">
+        <h2>News</h2>
+        <div class="news-container">
+            {% if posts %}
+            {% for x in posts %}
+            <a href="{% url 'read' x.slug %}" class="news-card">
+                <div class="image-container">
+                    <img src="media/{{x.relevant_image}}" alt="">
+                </div>
+                <div class="title">
+                    <p>{{x.title}}</p>
+                </div>
+                <div class="body">
+                    <p>{{x.body}}...</p>
+                </div>
+            </a>
+            {% endfor %}
+            {% else %}
+            <p style="text-align: center;">No data</p>
+            {% endif %}
+        </div>
+    </section>
+    <section class="event"></section>
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+
+</html>

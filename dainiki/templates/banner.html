@@ -1,0 +1,26 @@
+{% load static %}
+<div class="dainiki-banner">
+    {% if data %}
+    {% for x in data %}
+    <div class="banner-container">
+        <div class="image-container">
+            <img src="media/{{x.relevant_image}}" alt="">
+        </div>
+        <div class="body">
+            <h2>{{x.title}}</h2>
+            <p>
+                {{x.body}}...
+            </p>
+            <a href="">Read</a>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="index-dot">
+        {% for x in data %}
+        <div class="dot active" onclick="slideshow(0)"></div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="nodata"><p>No Data</p></div>
+    {% endif %}
+</div>

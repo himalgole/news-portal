@@ -1,0 +1,3 @@
+Myenv is the virtual environment
+
+this repo contains improved version of news-portal

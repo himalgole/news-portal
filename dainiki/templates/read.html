@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dainiki</title>
+    <link rel="shortcut icon" href="{% static 'photos/favicon.jpg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    {% include "navbar.html" %}
+    <div class="news-read-container">
+        <div class="main-news">
+            <div class="title">
+                <p>{{datum.title}}</p>
+            </div>
+            <p>Author: <a href="">{{datum.author}}</a></p>
+            <p>DateTime: {{datum.date_published}}</p>
+            <div class="image-container">
+                <img src="{{datum.relevant_image.url}}" alt="" width="600" height="330">
+            </div>
+            <div class="body">
+                <p>{{datum.body}}</p>
+            </div> 
+            <div class="post-actions">
+                <button><i class="fa fa-thumbs-up" aria-hidden="true"></i><p>0</p></button>
+                <button><i class="fa fa-comment"></i><p>120</p></button>
+                <button><i class="fa fa-share"></i><p>0</p></button>
+            </div>
+            <div class="commentbox-container">
+                <h3>Comments</h3>
+                <div class="commentbox">
+                    <p>No Comment yet</p>
+                </div>
+                <form action="" class="commentform">
+                    <input type="text" name="" id="write-comment" placeholder="Write a comment"/>
+                    <button type="submit"><i class="fa fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="latest-news">
+            <h2>Latest</h2>
+           <div class="latest-container">
+            {% for x in data %}
+            {% if x.slug == datum.slug %}
+            {% else %}
+            <a href="{% url 'read' x.slug %}" class="latest-row">
+                <img src="../media/{{x.relevant_image}}" alt=""  height="60" width="85">
+                <div class="latest-row-title">
+                    <p>{{x.title}}</p>
+                </div>
+            </a>
+            {% endif %}
+            {% endfor %}
+           </div>
+        </div>
+    </div>
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+
+</html>
